@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Glofox is a saas platform for boutiques, studios, and gyms which allows business owners to manage their courses, classes, members, memberships etc,.",
+    "version": "1.0.0",
+    "title": "Glofox",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "classes",
+      "description": "Create classes for a studio and allow members to attend classes"
+    },
+    {
+      "name": "bookings",
+      "description": "Book for a class"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/classes": {
+      "post": {
+        "tags": [
+          "classes"
+        ],
+        "summary": "Create a new class",
+        "description": "",
+        "operationId": "create",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a new class",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "classes"
+        ],
+        "summary": "Finds general classes",
+        "description": "",
+        "operationId": "getAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/classes/{id}": {
+      "put": {
+        "tags": [
+          "classes"
+        ],
+        "summary": "Update an existing class",
+        "description": "",
+        "operationId": "update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated class object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassPut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "classes"
+        ],
+        "summary": "Finds classes by ID",
+        "description": "",
+        "operationId": "get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID value that need to be considered for filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "classes"
+        ],
+        "summary": "Delete a class",
+        "description": "",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID that need to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "post": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Create a new booking",
+        "description": "",
+        "operationId": "createBookings",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a new booking",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Finds general bookings",
+        "description": "",
+        "operationId": "getAllBookings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "member",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/bookings/{id}": {
+      "put": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Update an existing booking",
+        "description": "",
+        "operationId": "updateBookings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated booking object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingPut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Finds bookings by ID",
+        "description": "",
+        "operationId": "getBookings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID value that need to be considered for filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Delete a booking",
+        "description": "",
+        "operationId": "deleteBookings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID that need to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassPost": {
+      "type": "object",
+      "required": [
+        "name",
+        "start_date",
+        "end_date",
+        "capacity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "class 01"
+        },
+        "start_date": {
+          "type": "string",
+          "example": "2022-02-01"
+        },
+        "end_date": {
+          "type": "string",
+          "example": "2022-02-10"
+        },
+        "capacity": {
+          "type": "integer",
+          "example": 10
+        }
+      }
+    },
+    "ClassPut": {
+      "type": "object",
+      "required": [
+        "name",
+        "class_date",
+        "capacity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "class 01"
+        },
+        "class_date": {
+          "type": "string",
+          "example": "2022-02-01"
+        },
+        "capacity": {
+          "type": "integer",
+          "example": 10
+        }
+      }
+    },
+    "BookingPost": {
+      "type": "object",
+      "required": [
+        "id_classes",
+        "member"
+      ],
+      "properties": {
+        "id_classes": {
+          "type": "string",
+          "example": "61ccbcab44f7486ec0eacc4d"
+        },
+        "member": {
+          "type": "string",
+          "example": "member 0000"
+        }
+      }
+    },
+    "BookingPut": {
+      "type": "object",
+      "required": [
+        "member"
+      ],
+      "properties": {
+        "member": {
+          "type": "string",
+          "example": "member 0000"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
